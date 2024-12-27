@@ -1,4 +1,3 @@
-// Login Component
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
@@ -13,6 +12,7 @@ interface LoginForm {
 
 export default function Login() {
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false); 
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const setAuth = useAuthStore((state) => state.setAuth);
@@ -21,12 +21,16 @@ export default function Login() {
   const togglePasswordVisibility = () => setShowPassword(!showPassword);
 
   const onSubmit = async (data: LoginForm) => {
+    setLoading(true); 
+    setError(''); 
     try {
       const response = await login(data);
       setAuth(response.token, response.user);
       navigate('/');
     } catch (err) {
       setError('Invalid credentials');
+    } finally {
+      setLoading(false); 
     }
   };
 
@@ -55,6 +59,7 @@ export default function Login() {
                 })}
                 className="input-field rounded-t-md"
                 placeholder="Email address"
+                disabled={loading} 
               />
               {errors.email && (
                 <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
@@ -66,6 +71,7 @@ export default function Login() {
                 {...register('password', { required: 'Password is required' })}
                 className="input-field rounded-b-md"
                 placeholder="Password"
+                disabled={loading} 
               />
               <button
                 type="button"
@@ -85,14 +91,19 @@ export default function Login() {
           )}
 
           <div>
-            <button type="submit" className="btn-primary w-full">
-              Sign in
+            <button
+              type="submit"
+              className={`btn-primary w-full ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+              disabled={loading} 
+            >
+              {loading ? 'Signing in...' : 'Sign in'} 
             </button>
           </div>
           <div className="btn-secondary flex justify-center w-1/2 mx-auto mt-4">
             <button
               onClick={() => navigate('/signup')}
               className="btn-secondary w-full py-2 rounded-md text-white bg-blue-600 hover:bg-blue-700 transition"
+              disabled={loading} 
             >
               Create Account
             </button>
@@ -102,4 +113,3 @@ export default function Login() {
     </div>
   );
 }
-
