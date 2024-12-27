@@ -13,6 +13,8 @@ interface SignupForm {
 export default function Signup() {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const navigate = useNavigate();
   const {
     register,
@@ -21,12 +23,16 @@ export default function Signup() {
     formState: { errors },
   } = useForm<SignupForm>();
 
+  const togglePasswordVisibility = () => setShowPassword(!showPassword);
+  const toggleConfirmPasswordVisibility = () =>
+    setShowConfirmPassword(!showConfirmPassword);
+
   const onSubmit = async (data: SignupForm) => {
     const { email, password } = data;
     try {
       await registerUser({ email, password });
       setSuccess('Account created successfully! Redirecting...');
-      setTimeout(() => navigate('/login'), 2000); // Redirect to login page after success
+      setTimeout(() => navigate('/login'), 2000);
     } catch (err) {
       setError('Failed to create an account. Try again.');
     }
@@ -62,9 +68,9 @@ export default function Signup() {
                 <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
               )}
             </div>
-            <div>
+            <div className="relative">
               <input
-                type="password"
+                type={showPassword ? 'text' : 'password'}
                 {...register('password', {
                   required: 'Password is required',
                   minLength: {
@@ -75,13 +81,20 @@ export default function Signup() {
                 className="input-field"
                 placeholder="Password"
               />
+              <button
+                type="button"
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-600"
+                onClick={togglePasswordVisibility}
+              >
+                {showPassword ? '🙈' : '👁️'}
+              </button>
               {errors.password && (
                 <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>
               )}
             </div>
-            <div>
+            <div className="relative">
               <input
-                type="password"
+                type={showConfirmPassword ? 'text' : 'password'}
                 {...register('confirmPassword', {
                   required: 'Confirm Password is required',
                   validate: (value) =>
@@ -90,8 +103,17 @@ export default function Signup() {
                 className="input-field rounded-b-md"
                 placeholder="Confirm Password"
               />
+              <button
+                type="button"
+                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-600"
+                onClick={toggleConfirmPasswordVisibility}
+              >
+                {showConfirmPassword ? '🙈' : '👁️'}
+              </button>
               {errors.confirmPassword && (
-                <p className="mt-1 text-sm text-red-600">{errors.confirmPassword.message}</p>
+                <p className="mt-1 text-sm text-red-600">
+                  {errors.confirmPassword.message}
+                </p>
               )}
             </div>
           </div>
@@ -102,6 +124,14 @@ export default function Signup() {
           <div>
             <button type="submit" className="btn-primary w-full">
               Sign up
+            </button>
+          </div>
+          <div className="btn-secondary flex justify-center w-1/2 mx-auto mt-4">
+            <button
+              onClick={() => navigate('/login')}
+              className="btn-secondary w-full py-2 rounded-md text-white bg-blue-600 hover:bg-blue-700 transition"
+            >
+              Back to Login
             </button>
           </div>
         </form>
