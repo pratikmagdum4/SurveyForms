@@ -10,7 +10,7 @@ export const BASE_URL = isLocalhost
 const api = axios.create({
   baseURL: BASE_URL,
 });
-
+console.log("The base url is",BASE_URL)
 export const UI_url =
   "http://localhost:5173" || import.meta.env.VITE_UI_BASE_URL;
 

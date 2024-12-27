@@ -23,7 +23,7 @@ export function useCreateForm() {
   const createForm = async ({ title, fields }: CreateFormParams): Promise<boolean> => {
     setLoading(true);
     setError(null);
-
+    console.log("The token is",token)
     try {
       const response = await axios.post(
         `${BASE_URL}/api/forms`, 
