@@ -1,14 +1,14 @@
 import axios from 'axios';
 import { Form } from '../types';
 import useAuthStore from '../store/authStore';
+import { BASE_URL } from '../api';
 
 const api = axios.create({
-  baseURL: 'http://localhost:5000/api',
+  baseURL: `${BASE_URL}/api`,
 });
 
-// Add a request interceptor
 api.interceptors.request.use((config) => {
-  const { token } = useAuthStore.getState(); // Access the token from zustand store
+  const { token } = useAuthStore.getState();
   if (token) {
     config.headers['Authorization'] = `Bearer ${token}`;
   }
@@ -17,7 +17,6 @@ api.interceptors.request.use((config) => {
   return Promise.reject(error);
 });
 
-// API calls
 export const getForms = async (page: number): Promise<Form[]> => {
   const response = await api.get(`/forms?page=${page}`);
   return response.data;

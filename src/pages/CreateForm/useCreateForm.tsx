@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
-import useAuthStore from '../../store/authStore'; // Adjust the path as needed
+import useAuthStore from '../../store/authStore';
+import { BASE_URL } from '../../api';
 
 interface FormField {
   name: string;
@@ -17,7 +18,6 @@ export function useCreateForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Access the token from Zustand store
   const token = useAuthStore((state) => state.token);
 
   const createForm = async ({ title, fields }: CreateFormParams): Promise<boolean> => {
@@ -26,7 +26,7 @@ export function useCreateForm() {
 
     try {
       const response = await axios.post(
-        'http://localhost:5000/api/forms', 
+        `${BASE_URL}/api/forms`, 
         { title, fields },
         {
           headers: {

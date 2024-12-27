@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Form } from '../../types';
 import useAuthStore from '../../store/authStore';
+import { BASE_URL } from '../../api';
 
 interface UseFormDataResult {
   form: Form | null;
@@ -17,7 +18,7 @@ export function useFormData(id: string): UseFormDataResult {
   useEffect(() => {
     const fetchFormData = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/forms/${id}`,{
+        const response = await axios.get(`${BASE_URL}/api/forms/${id}`,{
             headers:{
                 Authorization: `Bearer ${token}`,
             }
