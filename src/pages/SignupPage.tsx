@@ -52,7 +52,7 @@ export default function Signup() {
           </h2>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
-          <div className="rounded-md shadow-sm -space-y-px">
+          <div className="rounded-md shadow-sm -space-y-px ">
             <div>
               <input
                 {...register('email', {
@@ -69,7 +69,7 @@ export default function Signup() {
                 <p className={`${SignUpParaCSS}`}>{errors.email.message}</p>
               )}
             </div>
-            <div className="relative">
+            <div className="relative pb-2 pt-2">
               <input
                 type={showPassword ? 'text' : 'password'}
                 {...register('password', {
@@ -79,7 +79,7 @@ export default function Signup() {
                     message: 'Password must be at least 6 characters',
                   },
                 })}
-                className="input-field"
+                className="input-field "
                 placeholder="Password"
               />
               <button

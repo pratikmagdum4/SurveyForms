@@ -66,7 +66,7 @@ export default function Login() {
                 <p className={`${LoginParaCSS}`}>{errors.email.message}</p>
               )}
             </div>
-            <div className="relative">
+            <div className="relative pb-2 pt-2">
               <input
                 type={showPassword ? 'text' : 'password'}
                 {...register('password', { required: 'Password is required' })}
