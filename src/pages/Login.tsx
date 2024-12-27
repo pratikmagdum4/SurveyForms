@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import { login } from '../services/authService';
 import useAuthStore from '../store/authStore';
+import { LoginParaCSS } from '../components/styles';
 
 interface LoginForm {
   email: string;
@@ -62,7 +63,7 @@ export default function Login() {
                 disabled={loading} 
               />
               {errors.email && (
-                <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+                <p className={`${LoginParaCSS}`}>{errors.email.message}</p>
               )}
             </div>
             <div className="relative">
@@ -81,7 +82,7 @@ export default function Login() {
                 {showPassword ? '🙈' : '👁️'}
               </button>
               {errors.password && (
-                <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>
+                <p className={`${LoginParaCSS}`}>{errors.password.message}</p>
               )}
             </div>
           </div>

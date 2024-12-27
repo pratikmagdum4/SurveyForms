@@ -1,3 +1,5 @@
+import { CreateFormCSS } from "../../components/styles";
+
 interface AddFieldButtonProps {
     onAdd: (type: string) => void;
   }
@@ -7,25 +9,25 @@ interface AddFieldButtonProps {
       <div className="space-y-4">
         <button
           onClick={() => onAdd('text')}
-          className="btn-primary w-full"
+          className={`${CreateFormCSS}`}
         >
           Add Text Field
         </button>
         <button
           onClick={() => onAdd('number')}
-          className="btn-primary w-full"
+          className={`${CreateFormCSS}`}
         >
           Add Number Field
         </button>
         <button
           onClick={() => onAdd('email')}
-          className="btn-primary w-full"
+          className={`${CreateFormCSS}`}
         >
           Add Email Field
         </button>
         <button
           onClick={() => onAdd('checkbox')}
-          className="btn-primary w-full"
+          className={`${CreateFormCSS}`}
         >
           Add Checkbox Field
         </button>

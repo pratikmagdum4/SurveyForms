@@ -1,5 +1,6 @@
 import React from 'react';
 import { FormField } from '../../types';
+import { formEditCSS } from '../../components/styles';
 
 interface FieldEditorProps {
   field: FormField;
@@ -22,7 +23,7 @@ export default function FieldEditor({ field, onChange, onRemove }: FieldEditorPr
         value={field.label}
         onChange={(e) => handleChange('label', e.target.value)}
         placeholder="Field Label"
-        className="input-field w-full"
+        className={`${formEditCSS}`}
       />
 
       <input
@@ -30,13 +31,13 @@ export default function FieldEditor({ field, onChange, onRemove }: FieldEditorPr
         value={field.name}
         onChange={(e) => handleChange('name', e.target.value)}
         placeholder="Field Name"
-        className="input-field w-full"
+        className={`${formEditCSS}`}
       />
 
       <select
         value={field.type}
         onChange={(e) => handleChange('type', e.target.value)}
-        className="input-field w-full"
+        className={`${formEditCSS}`}
       >
         <option value="text">Text</option>
         <option value="number">Number</option>

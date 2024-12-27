@@ -2,6 +2,7 @@ import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from '../store/authStore';
 import Layout from '../components/Layout';
+import { DashBoardCSS, DashBoardSpan } from '../components/styles';
 
 export default function Dashboard() {
   const navigate = useNavigate();
@@ -28,9 +29,9 @@ export default function Dashboard() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => navigate('/forms/create')}
-                className="relative block w-full rounded-lg p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                className={`${DashBoardCSS}`}
               >
-                <span className="mt-2 block text-sm font-medium text-gray-900">
+                <span className={`${DashBoardSpan}`}>
                   Create new form
                 </span>
               </motion.button>
@@ -39,9 +40,10 @@ export default function Dashboard() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 onClick={() => navigate('/forms')}
-                className="relative block w-full rounded-lg p-12 text-center hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                className={`${DashBoardCSS}`}
+
               >
-                <span className="mt-2 block text-sm font-medium text-gray-900">
+                <span className={`${DashBoardSpan}`}>
                   View all forms
                 </span>
               </motion.button>

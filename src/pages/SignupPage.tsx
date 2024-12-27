@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import { motion } from 'framer-motion';
 import { register as registerUser } from '../services/authService';
+import { SignUpErrSuccCSS, SignUpParaCSS } from '../components/styles';
 
 interface SignupForm {
   email: string;
@@ -65,7 +66,7 @@ export default function Signup() {
                 placeholder="Email address"
               />
               {errors.email && (
-                <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
+                <p className={`${SignUpParaCSS}`}>{errors.email.message}</p>
               )}
             </div>
             <div className="relative">
@@ -89,7 +90,7 @@ export default function Signup() {
                 {showPassword ? '🙈' : '👁️'}
               </button>
               {errors.password && (
-                <p className="mt-1 text-sm text-red-600">{errors.password.message}</p>
+                <p className={`${SignUpParaCSS}`}>{errors.password.message}</p>
               )}
             </div>
             <div className="relative">
@@ -111,15 +112,14 @@ export default function Signup() {
                 {showConfirmPassword ? '🙈' : '👁️'}
               </button>
               {errors.confirmPassword && (
-                <p className="mt-1 text-sm text-red-600">
+                <p className={`${SignUpParaCSS}`}>
                   {errors.confirmPassword.message}
                 </p>
               )}
             </div>
           </div>
-
-          {error && <div className="text-red-600 text-sm text-center">{error}</div>}
-          {success && <div className="text-green-600 text-sm text-center">{success}</div>}
+          {error && <div className={`${SignUpErrSuccCSS}`}>{error}</div>}
+          {success && <div className={`${SignUpErrSuccCSS}`}>{success}</div>}
 
           <div>
             <button type="submit" className="btn-primary w-full">
